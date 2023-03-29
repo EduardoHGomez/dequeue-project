@@ -84,7 +84,7 @@ int main()
 	}
 
 	/*********************************************************/
-	printf("\n\nPrueba 3, inserta al final y retira del final\n");
+	printf("\n\nPrueba 4, inserta al final y retira del final\n");
 
 	for(i=15;i<20;i++)
 	{
@@ -104,7 +104,6 @@ int main()
 		num = dequeue_rmr(dq1);
 		printf("Retirando del final de la cola doblemente terminada: %d\n",*num);
 	}
-
 
 	dequeue_destroy(dq1);
 }

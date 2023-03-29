@@ -6,6 +6,7 @@
  */
 #include "dequeue.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 DEQUEUE dequeue_create()
 {
@@ -59,6 +60,8 @@ void dequeue_insf(DEQUEUE d,TYPE e)
     if (d->front == NULL && d->rear == NULL)
     {
         d->front = new;
+        d->rear = new;
+        d->size += 1;
     }
     else
     {   
@@ -108,6 +111,15 @@ TYPE dequeue_rmf(DEQUEUE d)
         toremove = d->front;
         TYPE elem_to_return = toremove->elem;
 
+        if(d->front == d->rear)
+        {
+            free(toremove);
+            d->front = NULL;
+            d->rear = NULL;
+            d->size -= 1;
+            return elem_to_return;
+        }
+        
         d->front = toremove->prior;
         d->front->next = NULL;
         free(toremove);
@@ -124,7 +136,6 @@ TYPE dequeue_rmr(DEQUEUE d)
 		Función que devuelve el elemento y remueve de la parte trasera de la cola doblemente terminada
 	*/
     struct STR_DEQUEUE_NODE *toremove = d->rear;
-
     TYPE elem_to_return = toremove->elem;
 
     if (dequeue_empty(d))
@@ -133,12 +144,23 @@ TYPE dequeue_rmr(DEQUEUE d)
     }
     else
     {
+
+        if(d->front == d->rear)
+        {
+            free(toremove);
+            d->front = NULL;
+            d->rear = NULL;
+            d->size -= 1;
+            return elem_to_return;
+        }
+        
         d->rear = toremove->next;
         d->rear->prior = NULL;
         free(toremove);
+        d->size -= 1;
+        return elem_to_return;
     }
-    d->size -= 1;
-    return elem_to_return;
+    
 }
 
 TYPE dequeue_peekf(DEQUEUE d)
@@ -146,7 +168,10 @@ TYPE dequeue_peekf(DEQUEUE d)
 	/*
 		Función que devuelve el elemento de la parte frontal de la cola doblemente terminada, más no lo remueve
 	*/
-    return d->front->elem;
+    if(dequeue_empty(d))
+        return 0;
+    else
+        return d->front->elem;
 }
 
 TYPE dequeue_peekr(DEQUEUE d)
@@ -154,7 +179,10 @@ TYPE dequeue_peekr(DEQUEUE d)
 	/*
 		Función que devuelve el elemento de la parte trasera de la cola doblemente terminada, más no lo remueve
 	*/
-    return d->rear->elem;
+    if(dequeue_empty(d))
+        return 0;
+    else
+        return d->rear->elem;
 }
 
 
