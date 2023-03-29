@@ -11,7 +11,10 @@
 #include "datatypes.h"
 
 struct STR_DEQUEUE_NODE {
-	/* 
+
+  TYPE elem;
+  struct STR_DEQUEUE_NODE * next,* prior;
+	/*        
 		Define los elementos que debe tener esta estructura que serán los nodos de la cola doblemente terminada que deben ser
 			- El elemento que se almacena
 			- El o los apuntadores a los nodos que pueden ser previo y/o siguiente	
@@ -19,12 +22,16 @@ struct STR_DEQUEUE_NODE {
 };
 
 struct STR_DEQUEUE {
+    
+    int size;
+    struct STR_DEQUEUE_NODE *front, *rear;
 	/* 
 		Define los elementos que debe tener esta estructura que contiene la información de la cola doblemente terminada como:
 			- Apuntadores al nodo frontal y trasero de la cola doblemente terminada
 			- Tamaño de la cola doblemente terminada, es decir la cantidad de elementos
 	*/
 };
+
 
 typedef struct STR_DEQUEUE * DEQUEUE;
 
