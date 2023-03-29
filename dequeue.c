@@ -197,4 +197,6 @@ void dequeue_destroy(DEQUEUE d)
             dequeue_rmf(d);
         }
     free(d);
+
+    
 }
